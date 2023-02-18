@@ -19,9 +19,11 @@ public class Dinosaur extends GameScreen {
     
     private  Animation dino_anim;
     
-    private Dino dino;
+    private Dino dino; // khai bao doi tuong
     
-    private Ground ground;
+    private Ground ground; // khai bao doi tuong
+    
+    private ObstaclesGroup obstaclesgroup;
     
     private int BEGIN_SCREEN = 0;
     
@@ -39,6 +41,8 @@ public class Dinosaur extends GameScreen {
         
         try {
             dinos = ImageIO.read(new File("images/ha.jpg"));
+            
+        
         } catch (IOException ex) {}
         
         dino_anim = new Animation(100);
@@ -56,6 +60,8 @@ public class Dinosaur extends GameScreen {
         dino = new Dino(10,320,80,80);
         
         ground = new Ground();
+        
+        obstaclesgroup = new ObstaclesGroup();
         
         BeginGame();
     }
@@ -75,6 +81,11 @@ public class Dinosaur extends GameScreen {
     public void paint(Graphics2D g2){
         dino_anim.PaintAnims((int)dino.getPosX(), (int)dino.getPosY() , dinos, g2, 0, 0);
         ground.Paint(g2);
+        
+    }
+    
+    private void resetGame(){
+        dino.setPos(10, 320);
     }
     
 
@@ -82,12 +93,15 @@ public class Dinosaur extends GameScreen {
     public void GAME_UPDATE(long deltaTime){
         
         if(CurrentScreen == BEGIN_SCREEN){
-            
+            resetGame();
             
         }else if(CurrentScreen == GAMEPLAY_SCREEN){
             dino_anim.Update_Me(deltaTime);
             dino.update(deltaTime);
             ground.Update();
+            obstaclesgroup.update();
+            
+            if(dino.getPosY() == 170 ) CurrentScreen = GAMEPLAY_SCREEN;
         }else{
             
         }
@@ -104,13 +118,15 @@ public class Dinosaur extends GameScreen {
         
         paint(g2);
         
+        obstaclesgroup.paint(g2);
+        
         if(CurrentScreen == BEGIN_SCREEN){
             g2.setColor(Color.red);
-            g2.drawString("Press space to play game", 200, 300);
+            g2.drawString("Press space to play game", 100, 100);
         }
         if(CurrentScreen == GAMEOVER_SCREEN){
             g2.setColor(Color.BLACK);
-            g2.drawString("Press space to continue", 200, 300);
+            g2.drawString("Press space to continue", 100, 100);
         }
         
     }

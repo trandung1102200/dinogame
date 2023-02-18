@@ -12,7 +12,7 @@ public class Dino extends Objects {
     
     public int vt = 0 ;
     
-    public int nhaycao = 150;
+    public int nhaycao = 300;
     
     public boolean isJumping = false;
     

@@ -41,6 +41,9 @@ public class Ground {
         g2.drawImage(groundImage, x2, y2, null);
     }
     
+    public int getYGround(){
+        return y1;
+    }
     
     
     

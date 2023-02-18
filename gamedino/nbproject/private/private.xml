@@ -5,7 +5,9 @@
         <group>
             <file>file:/C:/OOP/gamedino/src/DINO/Dinosaur.java</file>
             <file>file:/C:/OOP/gamedino/src/DINO/Dino.java</file>
+            <file>file:/C:/OOP/gamedino/src/DINO/Obstacles.java</file>
             <file>file:/C:/OOP/gamedino/src/DINO/Ground.java</file>
+            <file>file:/C:/OOP/gamedino/src/DINO/ObstaclesGroup.java</file>
         </group>
     </open-files>
 </project-private>
