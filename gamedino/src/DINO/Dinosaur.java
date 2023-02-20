@@ -25,6 +25,8 @@ public class Dinosaur extends GameScreen {
     
     private ObstaclesGroup obstaclesgroup;
     
+    private int point;
+    
     private int BEGIN_SCREEN = 0;
     
     private int GAMEPLAY_SCREEN = 1;
@@ -34,6 +36,8 @@ public class Dinosaur extends GameScreen {
     private int CurrentScreen = BEGIN_SCREEN;
     
     public static int posx = 10,posy = 320;
+    
+    public static int gamespeed = 3;
     
     
     public Dinosaur() throws IOException{
@@ -81,27 +85,42 @@ public class Dinosaur extends GameScreen {
     public void paint(Graphics2D g2){
         dino_anim.PaintAnims((int)dino.getPosX(), (int)dino.getPosY() , dinos, g2, 0, 0);
         ground.Paint(g2);
+        obstaclesgroup.paint(g2);
+        
         
     }
     
     private void resetGame(){
         dino.setPos(10, 320);
+        dino.setLive(true);
     }
     
 
     @Override
     public void GAME_UPDATE(long deltaTime){
         
+        
         if(CurrentScreen == BEGIN_SCREEN){
             resetGame();
             
         }else if(CurrentScreen == GAMEPLAY_SCREEN){
-            dino_anim.Update_Me(deltaTime);
-            dino.update(deltaTime);
-            ground.Update();
-            obstaclesgroup.update();
+            if(dino.isLive == true) {
+                dino_anim.Update_Me(deltaTime);
+                dino.update(deltaTime);
+                ground.Update();
+                obstaclesgroup.update();
+            }
             
-            if(dino.getPosY() == 170 ) CurrentScreen = GAMEPLAY_SCREEN;
+            
+            for(int i = 0 ;i<ObstaclesGroup.SIZE;i++){
+                if(dino.getRect().intersects(obstaclesgroup.getobstacles(i).getRect())){
+                    dino.setLive(false);
+                    CurrentScreen = GAMEOVER_SCREEN;
+                    
+                }
+            }
+            
+            if(dino.getPosY() == 100 ) CurrentScreen = GAMEOVER_SCREEN;
         }else{
             
         }
@@ -118,7 +137,7 @@ public class Dinosaur extends GameScreen {
         
         paint(g2);
         
-        obstaclesgroup.paint(g2);
+        
         
         if(CurrentScreen == BEGIN_SCREEN){
             g2.setColor(Color.red);
@@ -129,6 +148,7 @@ public class Dinosaur extends GameScreen {
             g2.drawString("Press space to continue", 100, 100);
         }
         
+        g2.drawString("Point : " + point, 20, 30);
     }
 
     
@@ -139,10 +159,13 @@ public class Dinosaur extends GameScreen {
             if(CurrentScreen == BEGIN_SCREEN){
                 CurrentScreen = GAMEPLAY_SCREEN;
             }else if(CurrentScreen == GAMEPLAY_SCREEN){
-                dino.setIsJumping(true);
-                dino.setisdrop(false);
+                if(dino.isLive == true ){
+                    dino.setIsJumping(true);
+                    dino.setisdrop(false);
+                }
             }else if(CurrentScreen == GAMEOVER_SCREEN){
                 CurrentScreen = BEGIN_SCREEN;
+                resetGame();
             }
             
             

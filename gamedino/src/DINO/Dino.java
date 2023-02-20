@@ -1,6 +1,7 @@
 
 package DINO;
 
+import java.awt.Rectangle;
 import pkg2dgamesframework.Objects;
 
 /**
@@ -12,17 +13,30 @@ public class Dino extends Objects {
     
     public int vt = 0 ;
     
-    public int nhaycao = 300;
+    public int nhaycao = 200;
     
     public boolean isJumping = false;
     
     public boolean isdrop = false;
     
-    public Dino(float x, float y, float w, float h){
+    private Rectangle rect;
+    
+    public boolean isLive = true;
+    
+    public Dino(int x, int y, int w, int h){
         super(x,y,w,h);
+        rect = new Rectangle(x,y,w,h);
     }
     
+    public void setLive(boolean b){
+        this.isLive = b;
+    }
+    
+    
+    
     public void update(long deltaTime){
+        
+        this.rect.setLocation((int)this.getPosX(),(int)this.getPosY());
         
         if(this.getPosY() == Dinosaur.posy - nhaycao  ){  //nhay xuong
             this.setIsJumping(false);
@@ -61,6 +75,10 @@ public class Dino extends Objects {
     
     public void setIsJumping(boolean isJumping){
         this.isJumping = isJumping;
+    }
+    
+    public Rectangle getRect(){
+        return rect;
     }
     
 }

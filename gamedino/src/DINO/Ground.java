@@ -29,8 +29,9 @@ public class Ground {
     }
     
     public void Update(){
-        x1-=2;
-        x2-=2;
+        
+        x1-=Dinosaur.gamespeed;
+        x2-=Dinosaur.gamespeed;
         
         if(x2<0) x1 = x2 + 710;
         if(x1<0) x2 = x1 + 710;

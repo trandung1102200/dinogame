@@ -18,9 +18,12 @@ public class ObstaclesGroup {
     
     private BufferedImage xrimage,xrimage2;
     
-    private int khoangcach2vatcan = 300;
+    private int khoangcach2vatcan = 500;
     
-    private int test = 1;
+    public static int SIZE = 6;
+    
+    public int posvatcanfirst = 780;
+    
     
     public ObstaclesGroup(){
         
@@ -36,7 +39,13 @@ public class ObstaclesGroup {
         Obstacles xr;
         
         for( int i = 0 ; i < 6 ; i++ ){
-            xr = new Obstacles(780 + i*khoangcach2vatcan,400-53,74,53);
+            if(i%2==0){
+                xr = new Obstacles(posvatcanfirst + i*khoangcach2vatcan,400-53,74,53);
+            }
+            else{
+                xr = new Obstacles(posvatcanfirst + i*khoangcach2vatcan,400-55,51,55);
+            }
+            
             xuongrongs.push(xr);
         }
     }
@@ -73,6 +82,10 @@ public class ObstaclesGroup {
             }
             
         }
+    }
+    
+    public Obstacles getobstacles(int i){
+        return xuongrongs.get(i);
     }
             
 }
