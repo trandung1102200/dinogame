@@ -14,21 +14,18 @@ public class ObstaclesGroup {
     
     private final QueueList<Obstacles> xuongrongs;
     
-    
-    
     private BufferedImage[] xrimage = new BufferedImage[7];
     
     private int khoangcach2vatcan = 500;
     
-    public static int SIZE = 6;
+    public static int SIZE = 7;
     
     public int posvatcanfirst = 780;
     
     Random generator = new Random();
         
     
-    public Vector <Integer> rdimg = new Vector <> ();  //random image   rdimg.get(i)
-    
+    public Vector <Integer> rdimg ;  //random image   rdimg.get(i)
     
     public int ktanh[][] = new int[7][2];
         
@@ -49,6 +46,8 @@ public class ObstaclesGroup {
         
         xuongrongs = new QueueList<Obstacles>();
         
+        rdimg = new Vector <> ();
+        
         
         ktanh[0][0] = 64;ktanh[0][1] = 53;ktanh[1][0]= 51;ktanh[1][1]=55;ktanh[2][0] = 32;ktanh[2][1] = 53;
         ktanh[3][0] = 51;ktanh[3][1] = 49;ktanh[4][0] = 49;ktanh[4][1]= 49;ktanh[5][0]= 34;ktanh[5][1] = 35;ktanh[6][0]=17;ktanh[6][1]=35;
@@ -57,15 +56,13 @@ public class ObstaclesGroup {
         for(int i = 0 ;i<7 ;i++){
             tmp = generator.nextInt(7);
             
-            this.rdimg.add(tmp);
-            
+            rdimg.add(tmp);
             Obstacles xr;
             xr = new Obstacles(posvatcanfirst +i*khoangcach2vatcan ,400-ktanh[rdimg.get(i)][1],ktanh[rdimg.get(i)][0],ktanh[rdimg.get(i)][1]);
             xuongrongs.push(xr);
             
-            
-            
         }
+        
         
         
         
@@ -94,6 +91,8 @@ public class ObstaclesGroup {
             xr = new Obstacles((int) (xuongrongs.get(5).getPosX() + khoangcach2vatcan),(int)(400-ktanh[rdimg.get(6)][1]),ktanh[rdimg.get(6)][0],ktanh[rdimg.get(6)][1]);
             
             xuongrongs.push(xr);
+            xuongrongs.get(6).setisbehind(false);
+            
             // 0 1 2 3 4 5 6 
             //   3 5 1 3 2 4 0 
             //     5 1 3 2 4 0 

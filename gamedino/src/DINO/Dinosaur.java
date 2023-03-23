@@ -112,7 +112,7 @@ public class Dinosaur extends GameScreen {
             }
             
             
-            for(int i = 0 ;i<ObstaclesGroup.SIZE;i++){
+            for(int i = 0 ;i<7;i++){      // xu ly va cham voi vat can
                 if(dino.getRect().intersects(obstaclesgroup.getxrs(i).getRect())){
                     dino.setLive(false);
                     CurrentScreen = GAMEOVER_SCREEN;
@@ -120,9 +120,18 @@ public class Dinosaur extends GameScreen {
                 }
             }
             
-            if(dino.getPosY() == 100 ) CurrentScreen = GAMEOVER_SCREEN;
-        }else{
+            for(int i = 0 ;i< 7 ;i++){
+                if(dino.getPosX()>obstaclesgroup.getxrs(i).getPosX() && !obstaclesgroup.getxrs(i).getisbehind() ){
+                    point+=100;
+                    obstaclesgroup.getxrs(i).setisbehind(true);
+                
+            }
+        }
             
+            //if(dino.getPosY() == 100 ) CurrentScreen = GAMEOVER_SCREEN;
+        }else{
+            CurrentScreen = BEGIN_SCREEN;
+            resetGame(); 
         }
        
         
@@ -147,7 +156,7 @@ public class Dinosaur extends GameScreen {
             g2.setColor(Color.BLACK);
             g2.drawString("Press space to continue", 100, 100);
         }
-        
+        g2.setColor(Color.red);
         g2.drawString("Point : " + point, 20, 30);
     }
 

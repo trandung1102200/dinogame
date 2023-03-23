@@ -12,6 +12,8 @@ public class Obstacles extends Objects{
     
     public Rectangle rect;
     
+    public boolean isbehind = false;
+    
     public Obstacles(int x,int y, int w, int h){
         super(x,y,w,h);
         rect = new Rectangle(x,y,w,h);
@@ -24,6 +26,13 @@ public class Obstacles extends Objects{
     
     public Rectangle getRect(){
         return rect;
+    }
+    
+    public void setisbehind(boolean b){
+        this.isbehind = b;
+    }
+    public boolean getisbehind(){
+        return this.isbehind;
     }
     
 }
