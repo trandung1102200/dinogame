@@ -23,7 +23,7 @@ public class Dinosaur extends GameScreen {
     
     private Ground ground; // khai bao doi tuong
     
-    private ObstaclesGroup obstaclesgroup;
+    private final ObstaclesGroup obstaclesgroup;
     
     private int point;
     
@@ -113,7 +113,7 @@ public class Dinosaur extends GameScreen {
             
             
             for(int i = 0 ;i<ObstaclesGroup.SIZE;i++){
-                if(dino.getRect().intersects(obstaclesgroup.getobstacles(i).getRect())){
+                if(dino.getRect().intersects(obstaclesgroup.getxrs(i).getRect())){
                     dino.setLive(false);
                     CurrentScreen = GAMEOVER_SCREEN;
                     
