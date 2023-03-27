@@ -44,12 +44,12 @@ public class Dinosaur extends GameScreen {
         super(780,500);
         
         try {
-            dinos = ImageIO.read(new File("images/ha.jpg"));
+            dinos = ImageIO.read(new File("images/ha.png"));
             
         
         } catch (IOException ex) {}
         
-        dino_anim = new Animation(100);
+        dino_anim = new Animation(200);
         AFrameOnImage f ;
         
         f = new AFrameOnImage(0,0,104,91);
@@ -61,7 +61,7 @@ public class Dinosaur extends GameScreen {
         f = new AFrameOnImage(0,0,104,91);
         dino_anim.AddFrame(f);
         
-        dino = new Dino(10,320,80,80);
+        dino = new Dino(10,320,70,70);
         
         ground = new Ground();
         
@@ -181,4 +181,3 @@ public class Dinosaur extends GameScreen {
         }  
     }
 }
-

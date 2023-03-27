@@ -49,7 +49,7 @@ public class ObstaclesGroup {
         rdimg = new Vector <> ();
         
         
-        ktanh[0][0] = 64;ktanh[0][1] = 53;ktanh[1][0]= 51;ktanh[1][1]=55;ktanh[2][0] = 32;ktanh[2][1] = 53;
+        ktanh[0][0] = 28;ktanh[0][1] = 36;ktanh[1][0]= 50;ktanh[1][1]=38;ktanh[2][0] = 25;ktanh[2][1] = 48;
         ktanh[3][0] = 51;ktanh[3][1] = 49;ktanh[4][0] = 49;ktanh[4][1]= 49;ktanh[5][0]= 34;ktanh[5][1] = 35;ktanh[6][0]=17;ktanh[6][1]=35;
         
         

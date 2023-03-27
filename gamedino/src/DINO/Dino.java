@@ -38,23 +38,23 @@ public class Dino extends Objects {
         
         this.rect.setLocation((int)this.getPosX(),(int)this.getPosY());
         
-        if(this.getPosY() == Dinosaur.posy - nhaycao  ){  //nhay xuong
+        if(this.getPosY() <= Dinosaur.posy - nhaycao  ){  //nhay xuong
             this.setIsJumping(false);
             this.setisdrop(true); 
         }   
         
-        if(this.getisdrop()){
-            vt = 5;
+        if(this.getisdrop()){  // roi xuong
+            vt = 4;
             this.setPosY(this.getPosY() + vt); 
         }
 
         if(this.getIsJumping()){//nhay len
             this.setisdrop(false);
-            vt = -5;
+            vt = -8;
             this.setPosY(this.getPosY() + vt);  
         }
         
-        if(this.getPosY() == Dinosaur.posy ) { // dung im 
+        else if(this.getPosY() >= Dinosaur.posy ) { // dung im 
             this.setIsJumping(false);
             this.setisdrop(false);
             this.setPosY(Dinosaur.posy);
