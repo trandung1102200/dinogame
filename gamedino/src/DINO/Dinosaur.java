@@ -25,6 +25,8 @@ public class Dinosaur extends GameScreen {
     
     private final ObstaclesGroup obstaclesgroup;
     
+    private final CloudGroup cloudgroup;
+    
     private int point;
     
     private int BEGIN_SCREEN = 0;
@@ -37,7 +39,7 @@ public class Dinosaur extends GameScreen {
     
     public static int posx = 10,posy = 320;
     
-    public static int gamespeed = 3;
+    public static int gamespeed = 2;
     
     
     public Dinosaur() throws IOException{
@@ -66,6 +68,7 @@ public class Dinosaur extends GameScreen {
         ground = new Ground();
         
         obstaclesgroup = new ObstaclesGroup();
+        cloudgroup = new CloudGroup();
         
         BeginGame();
     }
@@ -82,13 +85,7 @@ public class Dinosaur extends GameScreen {
      *
      * @param g2
      */
-    public void paint(Graphics2D g2){
-        dino_anim.PaintAnims((int)dino.getPosX(), (int)dino.getPosY() , dinos, g2, 0, 0);
-        ground.Paint(g2);
-        obstaclesgroup.paint(g2);
-        
-        
-    }
+
     
     private void resetGame(){
         dino.setPos(10, 320);
@@ -109,6 +106,7 @@ public class Dinosaur extends GameScreen {
                 dino.update(deltaTime);
                 ground.Update();
                 obstaclesgroup.update();
+                cloudgroup.update();
             }
             
             
@@ -140,7 +138,7 @@ public class Dinosaur extends GameScreen {
         
         
     }
-
+    
     @Override 
     public void GAME_PAINT(Graphics2D g2) {
         
@@ -179,5 +177,15 @@ public class Dinosaur extends GameScreen {
             
             
         }  
+    }
+        public void paint(Graphics2D g2){
+        g2.setColor(Color.decode("#b8daef"));
+        g2.fillRect(0, 0, 780, 500);
+        
+        dino_anim.PaintAnims((int)dino.getPosX(), (int)dino.getPosY() , dinos, g2, 0, 0);
+        ground.Paint(g2);
+        obstaclesgroup.paint(g2);
+        cloudgroup.paint(g2);
+        
     }
 }
