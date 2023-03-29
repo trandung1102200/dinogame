@@ -18,6 +18,7 @@ public class CloudGroup {
     public Vector <Integer> rdimg ;
     public int ktimg[][] = new int[5][2];
     public int tmp,vitri;
+    public int n;
     
     public CloudGroup() {
         try{
@@ -32,35 +33,38 @@ public class CloudGroup {
         ktimg[0][0] = 100 ; ktimg[0][1] = 100 ; ktimg[1][0] = 100 ; ktimg[1][1] = 100 ; ktimg[2][0] = 100 ; ktimg[2][1] = 100 ; 
         ktimg[3][0] = 100 ; ktimg[3][1] = 100 ; ktimg[4][0] = 100 ; ktimg[4][1] = 44 ; 
         vitri = 0;
-        for(int i = 0 ;i<10 ;i++){  //// 3 khoang 0-> 260 ; 261 -> 521 ; 521 -> 780 
+        n=30;
+        for(int i = 0 ;i<n ;i++){  //// 3 khoang 0-> 260 ; 261 -> 521 ; 521 -> 780 
             tmp = generator.nextInt(5);
             
             rdimg.add(tmp);
-            tmp = generator.nextInt(260) + i*260; // v2 tu 261 + 
+            
             Cloud cl;
-            cl = new Cloud( tmp , 30  ,ktimg[rdimg.get(i)][0],ktimg[rdimg.get(i)][1]);
+            tmp =  generator.nextInt(30) + 10;
+            cl = new Cloud( i*78 , tmp  ,ktimg[rdimg.get(i)][0],ktimg[rdimg.get(i)][1]);
             clouds.push(cl);
             
             
         }
     }
     public void update(){
-        for(int i = 0 ;i<10;i++){
+        
+        for(int i = 0 ;i<n;i++){
             getcl(i).update();
         }
-        if(getcl(0).getPosX()<-100){
+        if(getcl(0).getPosX()<-78){
             Cloud cl;Cloud temp = clouds.pop();
             rdimg.remove(0);
             tmp = generator.nextInt(5);
             rdimg.add(tmp);
-            tmp = generator.nextInt(260);
-            vitri = generator.nextInt(20) + 15;
-            cl = new Cloud((int)(tmp+ getcl(8).getPosX()) , vitri, ktimg[rdimg.get(9)][0],ktimg[rdimg.get(9)][1]);
+            
+            vitri = generator.nextInt(30) + 10;
+            cl = new Cloud((int)(getcl(n-2).getPosX() + 70) , vitri, ktimg[rdimg.get(n-1)][0],ktimg[rdimg.get(n-1)][1]);
             clouds.push(cl);
         }
     }
     public void paint(Graphics2D g2){
-        for( int i = 0 ; i < 5 ; i++ ){
+        for( int i = 0 ; i < n ; i++ ){
                 g2.drawImage(imgmay[rdimg.get(i)], (int)getcl(i).getPosX(),(int)getcl(i).getPosY()  , null);   
         }
     }

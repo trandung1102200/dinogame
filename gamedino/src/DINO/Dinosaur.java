@@ -51,7 +51,7 @@ public class Dinosaur extends GameScreen {
         
         } catch (IOException ex) {}
         
-        dino_anim = new Animation(200);
+        dino_anim = new Animation(100);
         AFrameOnImage f ;
         
         f = new AFrameOnImage(0,0,104,91);
