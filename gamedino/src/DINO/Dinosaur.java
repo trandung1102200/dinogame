@@ -126,7 +126,8 @@ public class Dinosaur extends GameScreen {
             }
         }
             
-            //if(dino.getPosY() == 100 ) CurrentScreen = GAMEOVER_SCREEN;
+            
+            
         }else{
             CurrentScreen = BEGIN_SCREEN;
             resetGame(); 
