@@ -34,11 +34,11 @@ public class Dino extends Objects {   // 90:100
     
     
     
-    public void update(long deltaTime){
+    public void update(long deltaTime){ 
         
         this.rect.setLocation((int)this.getPosX(),(int)this.getPosY());
         
-        if(this.getPosY() <= Dinosaur.posy - nhaycao  ){  //nhay xuong
+        if(this.getPosY() <= Dinosaur.posy - nhaycao  ){  //nhay xuong   posx = 50,posy = 320;
             this.setIsJumping(false);
             this.setisdrop(true); 
         }   

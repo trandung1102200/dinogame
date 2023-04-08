@@ -49,14 +49,14 @@ public class TreeGroup {
         for(int i = 0 ;i<n;i++){
             gettr(i).update();
         }
-        if(gettr(0).getPosX()<-100){
+        if(gettr(0).getPosX() + ktimg[rdimg.get(0)][0] < 0){
             Tree tr = trees.pop();
             rdimg.remove(0);
             tmp = generator.nextInt(ntree);
             rdimg.add(tmp);
             
             
-            tr = new Tree((int)(gettr(n-2).getPosX() + 260) , 400 - ktimg[rdimg.get(n-1)][1], ktimg[rdimg.get(n-1)][0],ktimg[rdimg.get(n-1)][1]);
+            tr = new Tree((int)(gettr(n-2).getPosX() + 260 + ktimg[rdimg.get(n-2)][0]) , 400 - ktimg[rdimg.get(n-1)][1], ktimg[rdimg.get(n-1)][0],ktimg[rdimg.get(n-1)][1]);
             trees.push(tr);
         }
     }

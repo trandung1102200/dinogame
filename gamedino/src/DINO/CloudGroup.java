@@ -56,7 +56,7 @@ public class CloudGroup {
             rdimg.add(tmp);
             
             Cloud cl;
-            tmp =  generator.nextInt(30) + 10;
+            tmp =  generator.nextInt(30);
             if(i==0){
                 cl = new Cloud( 0 , tmp  ,ktimg[rdimg.get(i)][0],ktimg[rdimg.get(i)][1]);
             }
@@ -74,13 +74,13 @@ public class CloudGroup {
         for(int i = 0 ;i<n;i++){
             getcl(i).update();
         }
-        if(getcl(0).getPosX()<-100){
+        if(getcl(0).getPosX() + ktimg[rdimg.get(0)][0]  < 0 ){
             Cloud cl;Cloud temp = clouds.pop();
             rdimg.remove(0);
             tmp = generator.nextInt(ncloud);
             rdimg.add(tmp);
             
-            vitri = generator.nextInt(30) + 10;
+            vitri = generator.nextInt(30);
             cl = new Cloud((int)(getcl(n-2).getPosX() + 65) , vitri, ktimg[rdimg.get(n-1)][0],ktimg[rdimg.get(n-1)][1]);
             clouds.push(cl);
         }

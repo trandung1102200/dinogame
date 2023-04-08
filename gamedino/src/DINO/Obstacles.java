@@ -16,7 +16,7 @@ public class Obstacles extends Objects{
     
     public Obstacles(int x,int y, int w, int h){
         super(x,y,w,h);
-        rect = new Rectangle(x,y,w,h);
+        rect = new Rectangle(x,y,w/2,h);
     }
     
     public void update(){

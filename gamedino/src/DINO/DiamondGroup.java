@@ -1,0 +1,70 @@
+
+package DINO;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.Random;
+import java.util.Vector;
+import javax.imageio.ImageIO;
+import pkg2dgamesframework.QueueList;
+
+
+public class DiamondGroup {
+    private static QueueList<Diamond> dias ;
+    private  BufferedImage imgdia = null;
+    Random generator = new Random();
+    private int n = 10,tmp;
+    private int w,h;
+    public Diamond t;
+    public DiamondGroup() {
+        
+        w = 25;h = 17;
+        t = new Diamond(70,20,w,h);
+        try{
+            imgdia = ImageIO.read(new File("images/diamond.png")); // 52:36
+
+        }catch (IOException ex) {}
+        
+        dias = new QueueList<Diamond>();
+        
+        
+        for(int i = 0 ;i<n ;i++){  
+            int k = 400 - h;// random tu 120 -> k
+            Diamond dia;
+            tmp =  generator.nextInt(k-120) + 120 ; // 120 -> k : vi tri diamon co the dc an
+            
+            
+            dia = new Diamond( i*260,tmp, w,h  );
+            
+            
+            dias.push(dia);
+            
+            
+        }
+    }
+    public void update(){
+        
+        for(int i = 0 ;i<n;i++){
+            getdia(i).update();
+        }
+        t.update();
+        t.setPosX(t.getPosX()+ (Dinosaur.gamespeed));
+        if(getdia(0).getPosX()<-52 || getdia(0).getisvc() == true){
+            Diamond dia; dia = dias.pop();
+            tmp =  generator.nextInt(400-h-120) + 120 ;
+            dia = new Diamond((int) (getdia(n-2).getPosX() + 260), tmp , w,h );
+            dias.push(dia);
+        }
+    }
+    public void paint(Graphics2D g2){
+        g2.drawImage(imgdia,  (int)t.getPosX(), (int)t.getPosY()  , null);
+        for( int i = 0 ; i < n ; i++ ){
+                g2.drawImage(imgdia, (int)getdia(i).getPosX(),(int)getdia(i).getPosY()  , null);   
+        }
+    }
+    public Diamond getdia(int i){
+        return dias.get(i);
+    }
+    
+}
