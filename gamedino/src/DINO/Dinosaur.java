@@ -27,6 +27,8 @@ public class Dinosaur extends GameScreen {
     
     private final CloudGroup cloudgroup;
     
+    private final TreeGroup treegroup;
+    
     private int point;
     
     private int BEGIN_SCREEN = 0;
@@ -63,12 +65,13 @@ public class Dinosaur extends GameScreen {
         f = new AFrameOnImage(0,0,104,91);
         dino_anim.AddFrame(f);
         
-        dino = new Dino(10,320,70,70);
+        dino = new Dino(10,320,70,50);
         
         ground = new Ground();
         
         obstaclesgroup = new ObstaclesGroup();
         cloudgroup = new CloudGroup();
+        treegroup = new TreeGroup();
         
         BeginGame();
     }
@@ -107,6 +110,7 @@ public class Dinosaur extends GameScreen {
                 ground.Update();
                 obstaclesgroup.update();
                 cloudgroup.update();
+                treegroup.update();
             }
             
             
@@ -187,6 +191,6 @@ public class Dinosaur extends GameScreen {
         ground.Paint(g2);
         obstaclesgroup.paint(g2);
         cloudgroup.paint(g2);
-        
+        treegroup.paint(g2);
     }
 }

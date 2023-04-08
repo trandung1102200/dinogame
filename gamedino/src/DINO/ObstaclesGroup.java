@@ -12,15 +12,15 @@ import java.util.*;
 
 public class ObstaclesGroup {
     
-    private final QueueList<Obstacles> xuongrongs;
+    private static QueueList<Obstacles> xuongrongs;
     
     private BufferedImage[] xrimage = new BufferedImage[7];
     
-    private int khoangcach2vatcan = 500;
+    public static int khoangcach2vatcan = 500;
     
     public static int SIZE = 7;
     
-    public int posvatcanfirst = 780;
+    public static int posvatcanfirst = 780;
     
     Random generator = new Random();
         
@@ -36,10 +36,10 @@ public class ObstaclesGroup {
         try {
             
             xrimage[0] = ImageIO.read(new File("images/xr.png")); // 64:53
-            xrimage[1] = ImageIO.read(new File("images/xr1.png")); // 51:55
-            xrimage[2] = ImageIO.read(new File("images/xr2.png")); // 32: 53
-            xrimage[3] = ImageIO.read(new File("images/xr3.png")); // 51:49
-            xrimage[4] = ImageIO.read(new File("images/xr4.png")); // 49:49
+            xrimage[1] = ImageIO.read(new File("images/xr1.png")); // 35:31
+            xrimage[2] = ImageIO.read(new File("images/xr2.png")); // 18:35
+            xrimage[3] = ImageIO.read(new File("images/xr3.png")); // 36:35
+            xrimage[4] = ImageIO.read(new File("images/xr4.png")); // 35:35
             xrimage[5] = ImageIO.read(new File("images/xr5.png")); // 34:35
             xrimage[6] = ImageIO.read(new File("images/xr6.png")); // 17:35
         } catch (IOException ex) {}
@@ -49,8 +49,8 @@ public class ObstaclesGroup {
         rdimg = new Vector <> ();
         
         
-        ktanh[0][0] = 28;ktanh[0][1] = 36;ktanh[1][0]= 50;ktanh[1][1]=38;ktanh[2][0] = 25;ktanh[2][1] = 48;
-        ktanh[3][0] = 51;ktanh[3][1] = 49;ktanh[4][0] = 49;ktanh[4][1]= 49;ktanh[5][0]= 34;ktanh[5][1] = 35;ktanh[6][0]=17;ktanh[6][1]=35;
+        ktanh[0][0] = 28;ktanh[0][1] = 36;ktanh[1][0]= 35;ktanh[1][1]=31;ktanh[2][0] = 18;ktanh[2][1] = 35;
+        ktanh[3][0] = 36;ktanh[3][1] = 35;ktanh[4][0] = 35;ktanh[4][1]= 35;ktanh[5][0]= 34;ktanh[5][1] = 35;ktanh[6][0]=17;ktanh[6][1]=35;
         
         
         for(int i = 0 ;i<7 ;i++){

@@ -8,7 +8,7 @@ import pkg2dgamesframework.Objects;
  *
  * @author user
  */
-public class Dino extends Objects {
+public class Dino extends Objects {   // 90:100
     
     
     public int vt = 0 ;
