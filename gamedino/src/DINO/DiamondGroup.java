@@ -8,9 +8,33 @@ import java.util.Random;
 import java.util.Vector;
 import javax.imageio.ImageIO;
 import pkg2dgamesframework.QueueList;
+import java.awt.Rectangle;
+import pkg2dgamesframework.Objects;
+
+
 
 
 public class DiamondGroup {
+    public class Diamond extends Objects {
+    public Rectangle rect;
+    public boolean isvc = false;
+    public Diamond(int x, int y, int w, int h) {
+        super(x, y, w, h);rect = new Rectangle(x,y,w,h);
+    }
+    public void update(){
+        rect.setLocation((int)this.getPosX(), (int)this.getPosY());
+        this.setPosX(this.getPosX() - Dinosaur.gamespeed );
+    }
+    public Rectangle getRect(){
+        return rect;
+    }
+    public boolean getisvc(){
+        return this.isvc;
+    }
+    public void setisvc(boolean t){
+        this.isvc = t;
+    }
+}
     private static QueueList<Diamond> dias ;
     private  BufferedImage imgdia = null;
     Random generator = new Random();

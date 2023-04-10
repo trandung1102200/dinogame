@@ -8,10 +8,19 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Vector;
 import javax.imageio.ImageIO;
+import pkg2dgamesframework.Objects;
 import pkg2dgamesframework.QueueList;
 
 
 public class TreeGroup {
+    public class Tree extends Objects{
+    public Tree(int x,int y, int w,int h){
+        super(x,y,w,h);
+    }
+    public void update(){
+        this.setPosX(this.getPosX() - Dinosaur.gamespeed);
+    }
+}
     private static QueueList<Tree> trees ;
     private BufferedImage[] imgtree;
     Random generator = new Random();

@@ -9,8 +9,38 @@ import javax.imageio.ImageIO;
 import pkg2dgamesframework.QueueList;
 import java.util.Random;
 import java.util.*;
-
+import java.awt.Rectangle;
+import pkg2dgamesframework.Objects;
 public class ObstaclesGroup {
+    
+public class Obstacles extends Objects{
+    
+    public Rectangle rect;
+    
+    public boolean isbehind = false;
+    
+    public Obstacles(int x,int y, int w, int h){
+        super(x,y,w,h);
+        rect = new Rectangle(x,y,w/2,h);
+    }
+    
+    public void update(){
+        rect.setLocation((int)this.getPosX(), (int)this.getPosY());
+        this.setPosX(this.getPosX() - (Dinosaur.gamespeed));
+    }
+    
+    public Rectangle getRect(){
+        return rect;
+    }
+    
+    public void setisbehind(boolean b){
+        this.isbehind = b;
+    }
+    public boolean getisbehind(){
+        return this.isbehind;
+    }
+    
+}
     
     private static QueueList<Obstacles> xuongrongs;
     

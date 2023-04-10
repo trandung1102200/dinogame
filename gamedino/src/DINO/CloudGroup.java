@@ -9,9 +9,23 @@ import java.util.Random;
 import java.util.Vector;
 import javax.imageio.ImageIO;
 import pkg2dgamesframework.QueueList;
+import pkg2dgamesframework.Objects;
+
+
 
 
 public class CloudGroup {
+    public class Cloud extends Objects {
+    
+    
+    
+    public Cloud(int x, int y, int w, int h) {
+        super(x, y, w, h);
+    }
+    public void update(){
+        this.setPosX(this.getPosX() - Dinosaur.gamespeed);
+    }
+}
     private static QueueList<Cloud> clouds ;
     private final BufferedImage[] imgmay;
     Random generator = new Random();
