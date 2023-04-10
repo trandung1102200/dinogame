@@ -21,11 +21,14 @@ public class Dino extends Objects {   // 90:100
     
     private Rectangle rect;
     
+   
+    
     public boolean isLive = true;
     
     public Dino(int x, int y, int w, int h){
         super(x,y,w,h);
         rect = new Rectangle(x,y,w,h);
+        
     }
     
     public void setLive(boolean b){
@@ -35,6 +38,7 @@ public class Dino extends Objects {   // 90:100
     
     
     public void update(long deltaTime){ 
+        
         
         this.rect.setLocation((int)this.getPosX(),(int)this.getPosY());
         
