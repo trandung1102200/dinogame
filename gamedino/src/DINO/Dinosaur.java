@@ -158,13 +158,7 @@ public class Dinosaur extends GameScreen {
             }
         }
         else{
-            /*
-            
-            CurrentScreen = BEGIN_SCREEN;
-            savepoint();
-            */
-            
-            //resetGame(); 
+            savepoint(); 
         } 
     }
 
