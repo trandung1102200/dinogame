@@ -13,7 +13,7 @@ public class test {
         ReadFile rf = new ReadFile();
         System.out.println(rf.data);
         WriteFile wff = new WriteFile();
-        wff.write("lan cute");
+        wff.write("");
         rf = new ReadFile();
         System.out.println(rf.data);
     }

@@ -224,7 +224,7 @@ public class Dinosaur extends GameScreen {
         
         dino.setPos(posx, posy);
         dino.setLive(true);
-        this.point = 0;
+        point = 0;
         obstaclesgroup = new ObstaclesGroup();
     }    
 }
