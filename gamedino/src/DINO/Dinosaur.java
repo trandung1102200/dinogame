@@ -70,19 +70,19 @@ public class Dinosaur extends GameScreen {
         
     
         
-        dino_anim = new Animation(50);
+        dino_anim = new Animation(100);
         AFrameOnImage f ;
         
-        f = new AFrameOnImage(0,0,104,91);
+        f = new AFrameOnImage(0,0,104,81);
         dino_anim.AddFrame(f);
-        f = new AFrameOnImage(104,0,104,91);
+        f = new AFrameOnImage(104,0,104,81);
         dino_anim.AddFrame(f);
-        f = new AFrameOnImage(208,0,104,91);
+        f = new AFrameOnImage(208,0,104,81);
         dino_anim.AddFrame(f);
-        f = new AFrameOnImage(0,0,104,91);
+        f = new AFrameOnImage(0,0,104,81);
         dino_anim.AddFrame(f);
         
-        dino = new Dino(posx,posy,80,90);
+        dino = new Dino(posx,posy,80,80);
         
         ground = new Ground();
         

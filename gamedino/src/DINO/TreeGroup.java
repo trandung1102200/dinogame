@@ -33,7 +33,7 @@ public class TreeGroup {
         trees = new QueueList<Tree>();
         rdimg = new Vector <> ();
         ktimg = new int[ntree][2];
-        ktimg[0][0] = 85; ktimg[0][1] =  100;          ktimg[1][0] = 100; ktimg[1][1] = 93 ;
+        ktimg[0][0] = 159; ktimg[0][1] =  125;          ktimg[1][0] = 100; ktimg[1][1] = 93 ;
         ktimg[2][0] = 100; ktimg[2][1] =  90;          ktimg[3][0] = 126; ktimg[3][1] = 117 ;
         for(int i = 0 ;i<n ;i++){  //// 3 khoang 0-> 260 ; 261 -> 521 ; 521 -> 780 
             tmp = generator.nextInt(ntree);            
