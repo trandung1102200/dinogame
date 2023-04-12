@@ -1,4 +1,3 @@
-
 package DINO;
 import java.io.*;
 import java.awt.Color;
@@ -19,20 +18,23 @@ import pkg2dgamesframework.GameScreen;
 public class Dinosaur extends GameScreen {
     
     private BufferedImage dinos;
-    
+     private BufferedImage birds;
     private  Animation dino_anim;
-    
+     private  Animation dino_anim1;
     private Dino dino; // khai bao doi tuong
-    
+     private Bird bird; // khai bao doi tuong
     private Ground ground; // khai bao doi tuong
     
-    public  ObstaclesGroup obstaclesgroup;
+    private final ObstaclesGroup obstaclesgroup;
     
     private final CloudGroup cloudgroup;
-    
     private final TreeGroup treegroup;
-    
     private final DiamondGroup diagroup;
+    private FileWriter write;
+    
+    private File read ;
+    
+    private int point;
     
     private int BEGIN_SCREEN = 0;
     
@@ -44,20 +46,18 @@ public class Dinosaur extends GameScreen {
     
     public static int posx = 50,posy = 320;
     
-    public static float gamespeed = (float) 2.0;
+    public static float gamespeed = (float)5.0;
     
-    public int point,maxpoint;
-    
+    public String data;
     
     
     public Dinosaur() throws IOException{
         super(780,500);
-        ReadFile rf = new ReadFile();
-        maxpoint = Integer.parseInt(rf.data); 
         
         try {
             dinos = ImageIO.read(new File("images/ha.png"));
-            
+            birds =    ImageIO.read(new File("images/ho.png")); 
+            write = new FileWriter("images/maxp.txt");
             /*
             myWriter.write("Files in Java might be tricky, but it is fun enough!");
             myWriter.close();
@@ -70,19 +70,40 @@ public class Dinosaur extends GameScreen {
         
     
         
-        dino_anim = new Animation(100);
+        dino_anim = new Animation(50);
         AFrameOnImage f ;
         
-        f = new AFrameOnImage(0,0,104,81);
+        f = new AFrameOnImage(0,0,104,91);
         dino_anim.AddFrame(f);
-        f = new AFrameOnImage(104,0,104,81);
+        f = new AFrameOnImage(104,0,104,91);
         dino_anim.AddFrame(f);
-        f = new AFrameOnImage(208,0,104,81);
+        f = new AFrameOnImage(208,0,104,91);
         dino_anim.AddFrame(f);
-        f = new AFrameOnImage(0,0,104,81);
+        f = new AFrameOnImage(0,0,104,91);
         dino_anim.AddFrame(f);
         
-        dino = new Dino(posx,posy,80,80);
+        dino_anim1 = new Animation(100);
+        AFrameOnImage f1 ;
+        
+        f1 = new AFrameOnImage(0,0,147,115);
+        dino_anim1.AddFrame(f1);
+        f1 = new AFrameOnImage(150,0,147,115);
+        dino_anim1.AddFrame(f1);
+        f1 = new AFrameOnImage(305,0,147,115);
+        dino_anim1.AddFrame(f1);
+        f1 = new AFrameOnImage(445,0,147,115);
+        dino_anim1.AddFrame(f1);
+         f1 = new AFrameOnImage(595,0,147,115);
+        dino_anim1.AddFrame(f1);
+        f1 = new AFrameOnImage(735,0,147,115);
+        dino_anim1.AddFrame(f1);
+        f1 = new AFrameOnImage(882,0,147,115);
+        dino_anim1.AddFrame(f1);
+        f1 = new AFrameOnImage(1029,0,147,115);
+        dino_anim1.AddFrame(f1);
+        
+        bird = new Bird(250,50,80,90);
+        dino = new Dino(posx,posy,80,90);
         
         ground = new Ground();
         
@@ -97,10 +118,8 @@ public class Dinosaur extends GameScreen {
     
     
     public static void main(String args[]) throws IOException {
-        
-        
-        Dinosaur newgame = new Dinosaur();
-        
+        Dinosaur mh = new Dinosaur();
+
     }
     
     /**
@@ -109,7 +128,10 @@ public class Dinosaur extends GameScreen {
      */
 
     
-    
+    private void resetGame(){
+        dino.setPos(posx, posy);
+        dino.setLive(true);
+    }
     
 
     @Override
@@ -126,8 +148,9 @@ public class Dinosaur extends GameScreen {
                 ground.Update();
                 obstaclesgroup.update();
                 cloudgroup.update();
-                treegroup.update();
-                diagroup.update();
+                dino_anim1.Update_Me(deltaTime);
+                 treegroup.update();
+                 diagroup.update();
             }
             
  
@@ -150,24 +173,45 @@ public class Dinosaur extends GameScreen {
                 
             }
             }    
-            for(int i = 0 ;i<10 ;i++){
-                if(dino.getRect().intersects(diagroup.getdia(i).getRect())){
-                    diagroup.getdia(i).setisvc(true);point+=1;
-                    
-                }  
-            }
+          
         }
         else{
-            savepoint(); 
+            CurrentScreen = BEGIN_SCREEN;
+            resetGame(); 
         } 
     }
 
-    
+    public void paint(Graphics2D g2){
+        g2.setColor(Color.decode("#b8daef"));
+        g2.fillRect(0, 0, 780, 500);
+        
+        dino_anim.PaintAnims((int)dino.getPosX(), (int)dino.getPosY() , dinos, g2, 0, 0);
+        dino_anim1.PaintAnims((int)bird.getPosX(), (int)bird.getPosY() , birds, g2, 0, 0);
+        ground.Paint(g2);
+        obstaclesgroup.paint(g2);
+        cloudgroup.paint(g2);
+        treegroup.paint(g2);
+        diagroup.paint(g2);
+    }
     
     
     @Override 
-    public void GAME_PAINT(Graphics2D g2) {      
-        paint(g2);  
+    public void GAME_PAINT(Graphics2D g2) {
+        
+        paint(g2);
+        
+        
+        
+        if(CurrentScreen == BEGIN_SCREEN){
+            g2.setColor(Color.red);
+            g2.drawString("Press space to play game", 100, 100);
+        }
+        if(CurrentScreen == GAMEOVER_SCREEN){
+            g2.setColor(Color.BLACK);
+            g2.drawString("Press space to continue", 100, 100);
+        }
+        g2.setColor(Color.red);
+        g2.drawString( " " + point, 40,30);
     }
 
     
@@ -184,47 +228,9 @@ public class Dinosaur extends GameScreen {
                 }
             }else if(CurrentScreen == GAMEOVER_SCREEN){
                 CurrentScreen = BEGIN_SCREEN;
+                resetGame();
             }   
-        }
-        
+        }  
     }
-    public void paint(Graphics2D g2){
-        g2.setColor(Color.decode("#b8daef"));
-        g2.fillRect(0, 0, 780, 500);
         
-        dino_anim.PaintAnims((int)dino.getPosX(), (int)dino.getPosY() , dinos, g2, 0, 0);
-        ground.Paint(g2);
-        obstaclesgroup.paint(g2);
-        cloudgroup.paint(g2);
-        treegroup.paint(g2);
-        diagroup.paint(g2);
-        if(CurrentScreen == BEGIN_SCREEN){
-            g2.setColor(Color.red);
-            g2.drawString("PRESS SPACE TO PLAY", 150, 50);
-            String pstr = String.valueOf(maxpoint);
-            g2.drawString("Highest score: " + pstr , 150, 30);
-        }
-        if(CurrentScreen == GAMEOVER_SCREEN){
-            g2.setColor(Color.BLACK);
-            g2.drawString("PRESS SPACE TO CONTINUE", 100, 100);
-        }
-        g2.setColor(Color.red);
-        g2.drawString( " " + point, 40,30);
-    }
-    public void savepoint(){
-        if(point > maxpoint){
-            maxpoint = point;
-            WriteFile wff = new WriteFile();
-            String pstr = String.valueOf(maxpoint);  
-            wff.write(pstr);
-        }
-        
-    }
-    private void resetGame() {
-        
-        dino.setPos(posx, posy);
-        dino.setLive(true);
-        point = 0;
-        obstaclesgroup = new ObstaclesGroup();
-    }    
 }
