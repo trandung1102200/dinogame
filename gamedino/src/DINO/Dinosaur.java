@@ -2,6 +2,7 @@
 package DINO;
 import java.io.*;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -48,7 +49,9 @@ public class Dinosaur extends GameScreen {
     
     public int point,maxpoint;
     
+    private Sky sky;
     
+    Font myFont2 = new Font("Arial", Font.BOLD, 14);
     
     public Dinosaur() throws IOException{
         super(780,500);
@@ -84,7 +87,7 @@ public class Dinosaur extends GameScreen {
         
         dino = new Dino(posx,posy,80,80);
         
-        ground = new Ground();
+        ground = new Ground(); sky = new Sky();
         
         obstaclesgroup = new ObstaclesGroup();
         cloudgroup = new CloudGroup();
@@ -123,6 +126,7 @@ public class Dinosaur extends GameScreen {
             if(dino.isLive == true) {
                 dino_anim.Update_Me(deltaTime);
                 dino.update(deltaTime);
+                sky.Update();
                 ground.Update();
                 obstaclesgroup.update();
                 cloudgroup.update();
@@ -191,7 +195,7 @@ public class Dinosaur extends GameScreen {
     public void paint(Graphics2D g2){
         g2.setColor(Color.decode("#b8daef"));
         g2.fillRect(0, 0, 780, 500);
-        
+        sky.Paint(g2);
         dino_anim.PaintAnims((int)dino.getPosX(), (int)dino.getPosY() , dinos, g2, 0, 0);
         ground.Paint(g2);
         obstaclesgroup.paint(g2);
@@ -200,15 +204,18 @@ public class Dinosaur extends GameScreen {
         diagroup.paint(g2);
         if(CurrentScreen == BEGIN_SCREEN){
             g2.setColor(Color.red);
+            g2.setFont(myFont2);
             g2.drawString("PRESS SPACE TO PLAY", 150, 50);
             String pstr = String.valueOf(maxpoint);
             g2.drawString("Highest score: " + pstr , 150, 30);
         }
         if(CurrentScreen == GAMEOVER_SCREEN){
+            g2.setFont(myFont2);
             g2.setColor(Color.BLACK);
             g2.drawString("PRESS SPACE TO CONTINUE", 100, 100);
         }
         g2.setColor(Color.red);
+        g2.setFont(myFont2);
         g2.drawString( " " + point, 40,30);
     }
     public void savepoint(){
@@ -221,7 +228,6 @@ public class Dinosaur extends GameScreen {
         
     }
     private void resetGame() {
-        
         dino.setPos(posx, posy);
         dino.setLive(true);
         point = 0;
