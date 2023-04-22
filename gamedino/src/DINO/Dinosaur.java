@@ -59,7 +59,7 @@ public class Dinosaur extends GameScreen {
         super(780,500);
         ReadFile rf = new ReadFile();
         maxpoint = Integer.parseInt(rf.data); 
-        nvqvc = 0;
+        nvqvc = 1;
         try {
             dinos = ImageIO.read(new File("images/ha.png"));
             
@@ -240,7 +240,6 @@ public class Dinosaur extends GameScreen {
         dino.setPos(posx, posy);
         dino.setLive(true);
         point = 0;
-        nvqvc = 0;
         obstaclesgroup = new ObstaclesGroup();
     }    
 }
