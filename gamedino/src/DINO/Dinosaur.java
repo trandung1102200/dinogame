@@ -51,13 +51,15 @@ public class Dinosaur extends GameScreen {
     
     private Sky sky;
     
+    private int nvqvc;private boolean night = false;
+    
     Font myFont2 = new Font("Arial", Font.BOLD, 14);
     
     public Dinosaur() throws IOException{
         super(780,500);
         ReadFile rf = new ReadFile();
         maxpoint = Integer.parseInt(rf.data); 
-        
+        nvqvc = 0;
         try {
             dinos = ImageIO.read(new File("images/ha.png"));
             
@@ -149,10 +151,13 @@ public class Dinosaur extends GameScreen {
             
             for(int i = 0 ;i< 7 ;i++){          // xu ly tang diem 
                 if(dino.getPosX()>obstaclesgroup.getxrs(i).getPosX() && !obstaclesgroup.getxrs(i).getisbehind() ){
-                    point+=00;
+                    nvqvc++;
                     obstaclesgroup.getxrs(i).setisbehind(true);
-                
-            }
+                }
+                if(nvqvc>=4){
+                    nvqvc = 0;
+                    night = !night; 
+                }
             }    
             for(int i = 0 ;i<10 ;i++){
                 if(dino.getRect().intersects(diagroup.getdia(i).getRect())){
@@ -193,9 +198,13 @@ public class Dinosaur extends GameScreen {
         
     }
     public void paint(Graphics2D g2){
-        g2.setColor(Color.decode("#b8daef"));
-        g2.fillRect(0, 0, 780, 500);
-        sky.Paint(g2);
+        if(night){
+            sky.Paint(g2);
+        }
+        else{
+            g2.setColor(Color.decode("#b8daef"));
+            g2.fillRect(0, 0, 780, 500);
+        }
         dino_anim.PaintAnims((int)dino.getPosX(), (int)dino.getPosY() , dinos, g2, 0, 0);
         ground.Paint(g2);
         obstaclesgroup.paint(g2);
@@ -231,6 +240,7 @@ public class Dinosaur extends GameScreen {
         dino.setPos(posx, posy);
         dino.setLive(true);
         point = 0;
+        nvqvc = 0;
         obstaclesgroup = new ObstaclesGroup();
     }    
 }
