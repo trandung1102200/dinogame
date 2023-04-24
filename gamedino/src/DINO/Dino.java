@@ -2,7 +2,9 @@
 package DINO;
 
 import java.awt.Rectangle;
+import java.io.File;
 import pkg2dgamesframework.Objects;
+import pkg2dgamesframework.SoundPlayer;
 
 /**
  *
@@ -19,8 +21,9 @@ public class Dino extends Objects {   // 90:100
     
     public boolean isdrop = false;
     
-    private Rectangle rect;
+    private final Rectangle rect;
     
+    private SoundPlayer jump,getdia,die,begingame,night;
    
     
     public boolean isLive = true;
@@ -28,7 +31,11 @@ public class Dino extends Objects {   // 90:100
     public Dino(int x, int y, int w, int h){
         super(x,y,w,h);
         rect = new Rectangle(x,y,w,h);
-        
+        jump = new SoundPlayer(new File("sound/jump.wav"));
+        getdia = new SoundPlayer(new File("sound/getdia.wav"));
+        die = new SoundPlayer(new File("sound/die.wav"));
+        begingame = new SoundPlayer(new File("sound/begingame.wav"));
+        night = new SoundPlayer(new File("sound/night.wav"));
     }
     
     public void setLive(boolean b){
@@ -83,6 +90,21 @@ public class Dino extends Objects {   // 90:100
     
     public Rectangle getRect(){
         return rect;
+    }
+    public void soundjump(){
+        jump.play();  
+    }
+    public void sounddie(){
+        die.play();
+    }
+    public void soundgetdia(){
+        getdia.play();
+    }
+    public void soundbegingame(){
+        begingame.play();
+    }
+    public void soundnight(){
+        night.play();
     }
     
 }

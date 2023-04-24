@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
-import java.util.Vector;
 import javax.imageio.ImageIO;
 import pkg2dgamesframework.QueueList;
 import java.awt.Rectangle;
@@ -46,11 +45,11 @@ public class DiamondGroup {
         w = 25;h = 17;
         t = new Diamond(70,20,w,h);
         try{
-            imgdia = ImageIO.read(new File("images/diamond.png")); // 52:36
+            imgdia = ImageIO.read(new File("images/diamond.png")); // 25:17
 
         }catch (IOException ex) {}
         
-        dias = new QueueList<Diamond>();
+        dias = new QueueList<>();
         
         
         for(int i = 0 ;i<n ;i++){  
@@ -74,7 +73,7 @@ public class DiamondGroup {
         }
         t.update();
         t.setPosX(t.getPosX()+ (Dinosaur.gamespeed));
-        if(getdia(0).getPosX()<-52 || getdia(0).getisvc() == true){
+        if(getdia(0).getPosX()<-25 || getdia(0).getisvc() == true){
             Diamond dia; dia = dias.pop();
             tmp =  generator.nextInt(400-h-120) + 120 ;
             dia = new Diamond((int) (getdia(n-2).getPosX() + 260), tmp , w,h );

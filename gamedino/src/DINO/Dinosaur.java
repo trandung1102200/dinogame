@@ -1,16 +1,13 @@
 
 package DINO;
-import java.io.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 import javax.imageio.ImageIO;
 import pkg2dgamesframework.AFrameOnImage;
 import pkg2dgamesframework.Animation;
@@ -21,11 +18,11 @@ public class Dinosaur extends GameScreen {
     
     private BufferedImage dinos;
     
-    private  Animation dino_anim;
+    private final  Animation dino_anim;
     
     private Dino dino; // khai bao doi tuong
     
-    private Ground ground; // khai bao doi tuong
+    private final Ground ground; // khai bao doi tuong
     
     public  ObstaclesGroup obstaclesgroup;
     
@@ -49,7 +46,7 @@ public class Dinosaur extends GameScreen {
     
     public int point,maxpoint;
     
-    private Sky sky;
+    private final Sky sky;
     
     private int nvqvc;private boolean night = false;
     
@@ -95,6 +92,7 @@ public class Dinosaur extends GameScreen {
         cloudgroup = new CloudGroup();
         treegroup = new TreeGroup();
         diagroup = new DiamondGroup();
+        dino.soundbegingame();
         BeginGame();
     }
     
@@ -121,9 +119,9 @@ public class Dinosaur extends GameScreen {
     public void GAME_UPDATE(long deltaTime){
         
         
-        if(CurrentScreen == BEGIN_SCREEN){
-            resetGame();
-            
+        
+        if(CurrentScreen == BEGIN_SCREEN){    
+            resetGame(); 
         }else if(CurrentScreen == GAMEPLAY_SCREEN){
             if(dino.isLive == true) {
                 dino_anim.Update_Me(deltaTime);
@@ -141,15 +139,16 @@ public class Dinosaur extends GameScreen {
             
             
             
-            for(int i = 0 ;i<7;i++){      // xu ly va cham voi vat can
+            for(int i = 0 ;i<7;i++){      // xu ly die
                 if(dino.getRect().intersects(obstaclesgroup.getxrs(i).getRect())){
                     dino.setLive(false);
+                    dino.sounddie();
                     CurrentScreen = GAMEOVER_SCREEN;
                     
                 }
             }
             
-            for(int i = 0 ;i< 7 ;i++){          // xu ly tang diem 
+            for(int i = 0 ;i< 7 ;i++){          // xu ly ngay va dem 
                 if(dino.getPosX()>obstaclesgroup.getxrs(i).getPosX() && !obstaclesgroup.getxrs(i).getisbehind() ){
                     nvqvc++;
                     obstaclesgroup.getxrs(i).setisbehind(true);
@@ -157,12 +156,14 @@ public class Dinosaur extends GameScreen {
                 if(nvqvc>=4){
                     nvqvc = 0;
                     night = !night; 
+                    if(night) dino.soundnight();
                 }
+                
             }    
-            for(int i = 0 ;i<10 ;i++){
+            for(int i = 0 ;i<10 ;i++){          // xu ly tang diem
                 if(dino.getRect().intersects(diagroup.getdia(i).getRect())){
                     diagroup.getdia(i).setisvc(true);point+=1;
-                    
+                    dino.soundgetdia();
                 }  
             }
         }
@@ -188,11 +189,12 @@ public class Dinosaur extends GameScreen {
                 CurrentScreen = GAMEPLAY_SCREEN;
             }else if(CurrentScreen == GAMEPLAY_SCREEN){
                 if(dino.isLive == true ){
-                    dino.setIsJumping(true);
+                    dino.setIsJumping(true);dino.soundjump();
                     dino.setisdrop(false);
                 }
             }else if(CurrentScreen == GAMEOVER_SCREEN){
                 CurrentScreen = BEGIN_SCREEN;
+                dino.soundbegingame();
             }   
         }
         
@@ -220,8 +222,8 @@ public class Dinosaur extends GameScreen {
         }
         if(CurrentScreen == GAMEOVER_SCREEN){
             g2.setFont(myFont2);
-            g2.setColor(Color.BLACK);
-            g2.drawString("PRESS SPACE TO CONTINUE", 100, 100);
+            g2.setColor(Color.red);
+            g2.drawString("PLAY AGAIN?", 100, 100);
         }
         g2.setColor(Color.red);
         g2.setFont(myFont2);
@@ -234,7 +236,6 @@ public class Dinosaur extends GameScreen {
             String pstr = String.valueOf(maxpoint);  
             wff.write(pstr);
         }
-        
     }
     private void resetGame() {
         dino.setPos(posx, posy);
