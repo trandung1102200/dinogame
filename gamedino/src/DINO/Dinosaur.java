@@ -7,7 +7,6 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 import javax.imageio.ImageIO;
 import pkg2dgamesframework.AFrameOnImage;
 import pkg2dgamesframework.Animation;
@@ -20,9 +19,9 @@ public class Dinosaur extends GameScreen {
     
     private final  Animation dino_anim;
     
-    private Dino dino; // khai bao doi tuong
+    private final Dino dino; 
     
-    private final Ground ground; // khai bao doi tuong
+    private final Background ground,sky; 
     
     public  ObstaclesGroup obstaclesgroup;
     
@@ -46,11 +45,11 @@ public class Dinosaur extends GameScreen {
     
     public int point,maxpoint;
     
-    private final Sky sky;
-    
     private int nvqvc;private boolean night = false;
     
     Font myFont2 = new Font("Arial", Font.BOLD, 14);
+    
+// ------------------------------------------------------------------------------------------------------------------------------------------------    
     
     public Dinosaur() throws IOException{
         super(780,500);
@@ -59,19 +58,8 @@ public class Dinosaur extends GameScreen {
         nvqvc = 1;
         try {
             dinos = ImageIO.read(new File("images/ha.png"));
-            
-            /*
-            myWriter.write("Files in Java might be tricky, but it is fun enough!");
-            myWriter.close();
-            */
-            
-            
-        
         } catch (IOException ex) {}
-        
-        
-    
-        
+ 
         dino_anim = new Animation(100);
         AFrameOnImage f ;
         
@@ -85,9 +73,7 @@ public class Dinosaur extends GameScreen {
         dino_anim.AddFrame(f);
         
         dino = new Dino(posx,posy,80,80);
-        
         ground = new Ground(); sky = new Sky();
-        
         obstaclesgroup = new ObstaclesGroup();
         cloudgroup = new CloudGroup();
         treegroup = new TreeGroup();
@@ -95,31 +81,13 @@ public class Dinosaur extends GameScreen {
         dino.soundbegingame();
         BeginGame();
     }
-    
-    
-    
-    
-    public static void main(String args[]) throws IOException {
-        
-        
-        Dinosaur newgame = new Dinosaur();
-        
+// ------------------------------------------------------------------------------------------------------------------------------------------------    
+    public static void main(String args[]) throws IOException {       
+        Dinosaur newgame = new Dinosaur();   
     }
-    
-    /**
-     *
-     * @param g2
-     */
-
-    
-    
-    
-
+// ------------------------------------------------------------------------------------------------------------------------------------------------
     @Override
     public void GAME_UPDATE(long deltaTime){
-        
-        
-        
         if(CurrentScreen == BEGIN_SCREEN){    
             resetGame(); 
         }else if(CurrentScreen == GAMEPLAY_SCREEN){
@@ -133,21 +101,13 @@ public class Dinosaur extends GameScreen {
                 treegroup.update();
                 diagroup.update();
             }
-            
- 
-            // Print the string
-            
-            
-            
             for(int i = 0 ;i<7;i++){      // xu ly die
                 if(dino.getRect().intersects(obstaclesgroup.getxrs(i).getRect())){
                     dino.setLive(false);
                     dino.sounddie();
-                    CurrentScreen = GAMEOVER_SCREEN;
-                    
+                    CurrentScreen = GAMEOVER_SCREEN;   
                 }
             }
-            
             for(int i = 0 ;i< 7 ;i++){          // xu ly ngay va dem 
                 if(dino.getPosX()>obstaclesgroup.getxrs(i).getPosX() && !obstaclesgroup.getxrs(i).getisbehind() ){
                     nvqvc++;
@@ -157,8 +117,7 @@ public class Dinosaur extends GameScreen {
                     nvqvc = 0;
                     night = !night; 
                     if(night) dino.soundnight();
-                }
-                
+                } 
             }    
             for(int i = 0 ;i<10 ;i++){          // xu ly tang diem
                 if(dino.getRect().intersects(diagroup.getdia(i).getRect())){
@@ -171,16 +130,12 @@ public class Dinosaur extends GameScreen {
             savepoint(); 
         } 
     }
-
-    
-    
-    
+// ------------------------------------------------------------------------------------------------------------------------------------------------
     @Override 
     public void GAME_PAINT(Graphics2D g2) {      
         paint(g2);  
     }
-
-    
+// ------------------------------------------------------------------------------------------------------------------------------------------------    
     @Override
     public void KEY_ACTION(KeyEvent e, int Event) {
         if(KEY_PRESSED == Event){ 
@@ -199,6 +154,7 @@ public class Dinosaur extends GameScreen {
         }
         
     }
+// ------------------------------------------------------------------------------------------------------------------------------------------------    
     public void paint(Graphics2D g2){
         if(night){
             sky.Paint(g2);
