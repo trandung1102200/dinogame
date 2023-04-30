@@ -26,7 +26,7 @@ public class Obstacles extends Objects{
     
     public void update(){
         rect.setLocation((int)this.getPosX(), (int)this.getPosY());
-        this.setPosX(this.getPosX() - (Dinosaur.gamespeed));
+        this.setPosX(this.getPosX() - (Main.gamespeed));
     }
     
     public Rectangle getRect(){

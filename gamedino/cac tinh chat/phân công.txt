@@ -1,0 +1,14 @@
+yêu cầu xem video hướng dẫn code game flappy bird 
+
+viết mô tả về các class bao gồm: -các thuộc tính và các phương thức. 
+				 -mô tả class đó chức năng gì(nó là gì trong game)
+				 - 
+
+
+ObstaclesGroup, DiamondGroup (Hà)
+CloudGroup, TreeGroup (Trang)
+ReadFile , WriteFile (Chinh)
+Background, Sky, Ground (Hoàng Anh) 
+2 file còn lại tôi làm 
+
+

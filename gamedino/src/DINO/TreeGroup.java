@@ -18,7 +18,7 @@ public class TreeGroup {
         super(x,y,w,h);
     }
     public void update(){
-        this.setPosX(this.getPosX() - Dinosaur.gamespeed);
+        this.setPosX(this.getPosX() - Main.gamespeed);
     }
 }
     private static QueueList<Tree> trees ;

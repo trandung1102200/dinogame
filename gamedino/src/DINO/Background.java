@@ -9,8 +9,8 @@ public abstract class Background {
     public int x1, y1,x2,y2;
     
     public void Update(){
-        x1-=Dinosaur.gamespeed;
-        x2-=Dinosaur.gamespeed;
+        x1-=Main.gamespeed;
+        x2-=Main.gamespeed;
         if(x2<0) x1 = x2 + 780;
         if(x1<0) x2 = x1 + 780;
     }

@@ -22,7 +22,7 @@ public class DiamondGroup {
     }
     public void update(){
         rect.setLocation((int)this.getPosX(), (int)this.getPosY());
-        this.setPosX(this.getPosX() - Dinosaur.gamespeed );
+        this.setPosX(this.getPosX() - Main.gamespeed );
     }
     public Rectangle getRect(){
         return rect;
@@ -72,7 +72,7 @@ public class DiamondGroup {
             getdia(i).update();
         }
         t.update();
-        t.setPosX(t.getPosX()+ (Dinosaur.gamespeed));
+        t.setPosX(t.getPosX()+ (Main.gamespeed));
         if(getdia(0).getPosX()<-25 || getdia(0).getisvc() == true){
             Diamond dia; dia = dias.pop();
             tmp =  generator.nextInt(400-h-120) + 120 ;
